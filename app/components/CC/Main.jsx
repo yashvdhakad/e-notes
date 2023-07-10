@@ -7,31 +7,20 @@ import Notes from "./Notes"
 const Main = () => {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
-    const [tag, setTag] = useState("")
+    const [tag, setTag] = useState([])
 
     const [editToggle, setEditToggle] = useState(true)
 
     const [notes, setNotes] = useState([
         {
-            title: "Testing 1",
-            description: "For add feature",
-            tag: "hakuna matata"
-        },
-        {
-            title: "Testing 2",
-            description: "For add feature",
-            tag: "hakuna matata"
-        },
-        {
-            title: "Testing 3",
-            description: "For add feature",
-            tag: "hakuna matata"
-        },
+            title: "Bugs to be fixed",
+            description: "editToggle fix, ThemeToggle Fix, input section blank on onclick, tag array wiring",
+            tag: ["work", "personal", "general"]
+        }
     ])
 
     const addNoteHandler = () => {
         title === "" || description === "" || tag === "" ? "" : setNotes((arr) => [...arr, { title, description, tag }])
-        setTitle("0"); setDescription("0"); setTag("0");
     }
 
     const deleteAllHandler = () => {
@@ -45,7 +34,18 @@ const Main = () => {
                 <p>Happy eNoting 😎</p>
                 <input onChange={(e) => setTitle(e.target.value)} className='py-3 px-6 bg-indigo-600 rounded-lg placeholder:text-indigo-200/60' type="text" name="title" placeholder="Title" />
                 <textarea onChange={(e) => setDescription(e.target.value)} className='px-6 py-3 bg-indigo-600 rounded-lg placeholder:text-indigo-200/60' name="description" placeholder="Description" cols="24" rows="5"></textarea>
-                <input onChange={(e) => setTag(e.target.value)} className='py-3 px-6 bg-indigo-600 rounded-lg placeholder:text-indigo-200/60' type="text" name="tag" placeholder="Tags" />
+                <div className='p-2 bg-indigo-600 rounded-lg placeholder:text-indigo-200/60 flex space-x-2'>
+                    {
+                        notes.map((note) => {
+                            return note.tag.map((t, i) => {
+                                const tagHandler = () => {
+                                    setTag((arr) => [...arr, t])
+                                }
+                                return <div key={i} onClick={tagHandler} className="py-3 px-6 rounded-lg bg-indigo-700 cursor-pointer border border-transparent hover:bg-indigo-800 focus:outline active:bg-indigo-900 select-none">{t}</div>
+                            })
+                        })
+                    }
+                </div>
                 <div className="flex space-x-6">
                     <Button clickHandler={addNoteHandler} cta="Add Note" />
                     <Button clickHandler={deleteAllHandler} cta="Delete All" />
@@ -60,7 +60,7 @@ const Main = () => {
                             editToggle ? setEditToggle(false) : setEditToggle(true);
                         }
 
-                        const deleteHandler = (i) => {
+                        const deleteHandler = () => {
                             setNotes(notes.toSpliced(i, 1))
                         }
 
