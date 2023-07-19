@@ -1,7 +1,7 @@
 "use client";
 import { createContext, useState } from "react";
 
-const Context = createContext()
+const Context = createContext({})
 
 const ContextProvider = ({children}) => {
     const [user, setUser] = useState({});

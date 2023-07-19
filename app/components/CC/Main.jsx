@@ -34,6 +34,8 @@ const Main = () => {
                 <p>Happy eNoting 😎</p>
                 <input onChange={(e) => setTitle(e.target.value)} className='py-3 px-6 bg-indigo-600 rounded-lg placeholder:text-indigo-200/60' type="text" name="title" placeholder="Title" />
                 <textarea onChange={(e) => setDescription(e.target.value)} className='px-6 py-3 bg-indigo-600 rounded-lg placeholder:text-indigo-200/60' name="description" placeholder="Description" cols="24" rows="5"></textarea>
+
+                {/* Tags */}
                 <div className='p-2 bg-indigo-600 rounded-lg placeholder:text-indigo-200/60 flex space-x-2'>
                     {
                         notes.map((note) => {
@@ -46,6 +48,7 @@ const Main = () => {
                         })
                     }
                 </div>
+                {/* Buttons */}
                 <div className="flex space-x-6">
                     <Button clickHandler={addNoteHandler} cta="Add Note" />
                     <Button clickHandler={deleteAllHandler} cta="Delete All" />

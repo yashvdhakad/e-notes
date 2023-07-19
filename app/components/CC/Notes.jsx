@@ -21,8 +21,12 @@ const Notes = ({ note, i, editHandler, deleteHandler, editToggle }) => {
                 <div className='text-sm font-medium'>{currentDate}</div>
                 {!editToggle ? <p className='text-sm text-orange-500 font-medium'>*Editing Mode On*</p> : ""}
             </div>
+
+            {/* Inputs */}
             <input onChange={(e) => setNewTitle(e.target.value)} disabled={editToggle} className="text-xl font-medium py-3 px-6 rounded-lg bg-indigo-700" value={`${i + 1}. ${note.title}`} />
             <textarea onChange={(e) => setNewDescription(e.target.value)} disabled={editToggle} className={`${editToggle ? "" : "resize-none"} text-lg py-3 px-6 rounded-lg bg-indigo-700`} value={note.description} rows={4} />
+
+            {/* Tags */}
             <div className='flex space-x-2'>
                 {
                     note.tag.map((t, i) => {
@@ -33,6 +37,7 @@ const Notes = ({ note, i, editHandler, deleteHandler, editToggle }) => {
                 }
             </div>
 
+            {/* Button & ThemeToggle */}
             <div className='flex justify-start items-center space-x-2'>
                 <Button clickHandler={editHandler} cta={!editToggle ? "Save" : "Edit"} />
                 <Button clickHandler={deleteHandler} cta="Delete" />

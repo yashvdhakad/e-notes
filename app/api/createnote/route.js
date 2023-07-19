@@ -3,7 +3,7 @@ import { Note } from "../../models/Note"
 
 export const POST = async (req, res) => {
     try {
-        await connectDB();
+        connectDB();
         const { title, description, tag } = req.body
         await Note.create({ title, description, tag })
         res.json({ success: true })
