@@ -1,5 +1,5 @@
 import { connectDB } from "@/app/utils/features"
-import { Note } from "../../models/note"
+import { Note } from "../../models/Note"
 
 export const POST = async (req, res) => {
     try {
