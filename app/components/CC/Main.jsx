@@ -1,32 +1,19 @@
 "use client"
 
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Button } from "./Buttons"
 import Notes from "./Notes"
-import axios from "axios"
-import toast, { Toaster } from 'react-hot-toast';
+import { NoteContext } from "../../context/noteContext"
+import { Toaster } from 'react-hot-toast'
 
 const Main = () => {
+    const { notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI } = useContext(NoteContext)
+
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [tag, setTag] = useState([])
 
     const tags = ["work", "personal", "life"]
-
-    const [editToggle, setEditToggle] = useState(true)
-
-    const [notes, setNotes] = useState([])
-
-    const addNoteAPI = async () => {
-        try {
-            const response = await axios.post("/api/notes/create", notes)
-            console.log("Added note successfully", response.data)
-            toast.success("Note added successfully")
-        } catch (error) {
-            console.log("Adding note failed", error.message)
-            toast.error(error.message)
-        }
-    }
 
     const addNoteHandler = () => {
         title === "" || description === "" || tag === "" ? "" : setNotes((arr) => [...arr, { title, description, tag }])
@@ -37,10 +24,12 @@ const Main = () => {
 
     const deleteAllHandler = () => {
         setNotes([]);
+        deleteAllNoteAPI();
     }
 
     return (
         <>
+            <Toaster />
             {/* Input */}
             <section className='lg:w-1/2 h-full flex flex-col justify-center items-center space-y-6 text-xl'>
                 <p className="">Happy eNoting 😎</p>
@@ -59,11 +48,11 @@ const Main = () => {
                         })
                     }
                 </div>
+
                 {/* Buttons */}
                 <div className="flex space-x-6">
                     <Button clickHandler={addNoteHandler} cta="Add Note" />
                     <Button clickHandler={deleteAllHandler} cta="Delete All" />
-                    <Toaster />
                 </div>
             </section>
 
