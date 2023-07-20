@@ -3,14 +3,8 @@
 import { useState } from "react"
 import { Button } from "./Buttons"
 import Notes from "./Notes"
-
+import axios from "axios"
 import toast, { Toaster } from 'react-hot-toast';
-const notify = () => toast('✅ Note added successfully.', {
-    style: {
-        background: 'purple',
-        color: "white",
-    },
-});
 
 const Main = () => {
     const [title, setTitle] = useState("")
@@ -23,10 +17,22 @@ const Main = () => {
 
     const [notes, setNotes] = useState([])
 
+    const addNoteAPI = async () => {
+        try {
+            const response = await axios.post("/api/notes/create", notes)
+            console.log("Added note successfully", response.data)
+            toast.success("Note added successfully")
+        } catch (error) {
+            console.log("Adding note failed", error.message)
+            toast.error(error.message)
+        }
+    }
+
     const addNoteHandler = () => {
         title === "" || description === "" || tag === "" ? "" : setNotes((arr) => [...arr, { title, description, tag }])
         setTitle("")
         setDescription("")
+        addNoteAPI();
     }
 
     const deleteAllHandler = () => {
@@ -57,7 +63,6 @@ const Main = () => {
                 <div className="flex space-x-6">
                     <Button clickHandler={addNoteHandler} cta="Add Note" />
                     <Button clickHandler={deleteAllHandler} cta="Delete All" />
-                    <button className="hidden" onClick={notify}> Make me a toast</button>
                     <Toaster />
                 </div>
             </section>
