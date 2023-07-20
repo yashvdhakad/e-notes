@@ -1,15 +1,16 @@
 "use client";
 import { createContext, useState } from "react";
 
-const Context = createContext({})
+export const NoteContext = createContext()
 
 const ContextProvider = ({children}) => {
     const [user, setUser] = useState({});
+    const [noteColor, setNoteColor] = useState("")
 
   return (
-    <Context.Provider value={{user, setUser}}>
+    <NoteContext.Provider value={{user, setUser, noteColor, setNoteColor}}>
         {children}
-    </Context.Provider>
+    </NoteContext.Provider>
   )
 }
 

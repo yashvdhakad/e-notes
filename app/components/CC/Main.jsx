@@ -9,15 +9,11 @@ const Main = () => {
     const [description, setDescription] = useState("")
     const [tag, setTag] = useState([])
 
+    const tags = ["work", "personal", "life"]
+
     const [editToggle, setEditToggle] = useState(true)
 
-    const [notes, setNotes] = useState([
-        {
-            title: "Bugs to be fixed",
-            description: "editToggle fix, ThemeToggle Fix, input section blank on onclick, tag array wiring",
-            tag: ["work", "personal", "general"]
-        }
-    ])
+    const [notes, setNotes] = useState([])
 
     const addNoteHandler = () => {
         title === "" || description === "" || tag === "" ? "" : setNotes((arr) => [...arr, { title, description, tag }])
@@ -31,20 +27,19 @@ const Main = () => {
         <>
             {/* Input */}
             <section className='lg:w-1/2 h-full flex flex-col justify-center items-center space-y-6 text-xl'>
-                <p>Happy eNoting 😎</p>
+                <p className="">Happy eNoting 😎</p>
                 <input onChange={(e) => setTitle(e.target.value)} className='py-3 px-6 bg-indigo-600 rounded-lg placeholder:text-indigo-200/60' type="text" name="title" placeholder="Title" />
                 <textarea onChange={(e) => setDescription(e.target.value)} className='px-6 py-3 bg-indigo-600 rounded-lg placeholder:text-indigo-200/60' name="description" placeholder="Description" cols="24" rows="5"></textarea>
 
                 {/* Tags */}
                 <div className='p-2 bg-indigo-600 rounded-lg placeholder:text-indigo-200/60 flex space-x-2'>
                     {
-                        notes.map((note) => {
-                            return note.tag.map((t, i) => {
-                                const tagHandler = () => {
-                                    setTag((arr) => [...arr, t])
-                                }
-                                return <div key={i} onClick={tagHandler} className="py-3 px-6 rounded-lg bg-indigo-700 cursor-pointer border border-transparent hover:bg-indigo-800 focus:outline active:bg-indigo-900 select-none">{t}</div>
-                            })
+                        tags.map((t, i) => {
+                            const tagHandler = () => {
+                                setTag((arr) => [...arr, t])
+                            }
+
+                            return <div key={i} onClick={tagHandler} className="py-3 px-6 rounded-lg bg-indigo-700 cursor-pointer hover:bg-indigo-800 active:bg-indigo-900 select-none">{t}</div>
                         })
                     }
                 </div>

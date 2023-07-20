@@ -1,6 +1,7 @@
 import ContextProvider from './context/noteContext'
 import './globals.css'
 import { Inter, Syne } from 'next/font/google'
+import Nav from './components/sc/Nav'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,7 +15,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <ContextProvider>
-          {children}
+          <>
+            <Nav />
+            {children}
+          </>
         </ContextProvider>
       </body>
     </html>

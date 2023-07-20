@@ -12,7 +12,7 @@ const Notes = ({ note, i, editHandler, deleteHandler, editToggle }) => {
     let day = date.getDate(), month = date.getMonth() + 1, year = date.getFullYear();
     let currentDate = `${day}/${month}/${year}`;
 
-    const colorArr = ["yellow-600", "red-600", "blue-600"]
+    const colorArr = ["bg-yellow-600", "bg-red-600", "bg-black"]
 
     return (
         // Note Card
@@ -32,7 +32,7 @@ const Notes = ({ note, i, editHandler, deleteHandler, editToggle }) => {
                     note.tag.map((t, i) => {
                         const tagHandler = () => { }
 
-                        return <div key={i} onClick={tagHandler} className="py-3 px-6 rounded-lg bg-indigo-700 cursor-pointer border border-transparent hover:bg-indigo-800 focus:outline active:bg-indigo-900 select-none">{t}</div>
+                        return <div key={i} onClick={tagHandler} className={`py-3 px-6 rounded-lg bg-indigo-700 border border-transparent focus:outline select-none ${editToggle ? "" : "hover:bg-indigo-800 active:bg-indigo-900 cursor-pointer"}`}>{t}</div>
                     })
                 }
             </div>
