@@ -1,5 +1,5 @@
 'use client'
-import { Button } from "@/app/components/cc/Buttons"
+import { Button } from "../components/cc/Buttons"
 import Link from "next/link"
 
 const page = () => {
@@ -14,9 +14,9 @@ const page = () => {
                     <h1 className="font-medium text-2xl">Sign Up for eNotes</h1>
                     <hr className="opacity-30" />
                     <div className="flex flex-col space-y-6">
-                        <input className="py-3 px-6 rounded-lg bg-indigo-600 placeholder:text-indigo-200/60" type="name" name="" placeholder="Enter your full name" />
-                        <input className="py-3 px-6 rounded-lg bg-indigo-600 placeholder:text-indigo-200/60" type="email" name="" placeholder="Enter your email" />
-                        <input className="py-3 px-6 rounded-lg bg-indigo-600 placeholder:text-indigo-200/60" type="password" name="" placeholder="Enter your password" />
+                        <input className="py-3 px-6 rounded-lg bg-slate-600 placeholder:text-slate-200/60" type="name" name="" placeholder="Enter your full name" />
+                        <input className="py-3 px-6 rounded-lg bg-slate-600 placeholder:text-slate-200/60" type="email" name="" placeholder="Enter your email" />
+                        <input className="py-3 px-6 rounded-lg bg-slate-600 placeholder:text-slate-200/60" type="password" name="" placeholder="Enter your password" />
                     </div>
                     <Button clickHandler={clickHandler} cta="Sign Up" />
                     <hr className="opacity-30" />

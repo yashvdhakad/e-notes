@@ -4,6 +4,7 @@ import { Button } from './Buttons'
 import ThemeToggle from './ThemeToggle'
 import Image from 'next/image'
 import copyIcon from '@/app/assets/svg/copy-solid.svg'
+import { toast } from 'react-hot-toast';
 
 const Notes = ({ note, i, editHandler, deleteHandler, editToggle }) => {
     const [newtitle, setNewTitle] = useState("")
@@ -18,23 +19,23 @@ const Notes = ({ note, i, editHandler, deleteHandler, editToggle }) => {
 
     return (
         // Note Card
-        <div className="relative p-2 rounded-lg bg-indigo-600 flex flex-col space-y-2">
+        <div className="relative p-2 rounded-lg bg-slate-600 flex flex-col space-y-2">
             <div className='flex justify-between items-center'>
                 <div className='text-sm font-medium'>{currentDate}</div>
                 {!editToggle ? <p className='text-sm text-orange-500 font-medium'>*Editing Mode On*</p> : ""}
             </div>
 
             {/* Inputs */}
-            {/* <input onChange={(e) => setNewTitle(e.target.value)} disabled={editToggle} className="text-xl font-medium py-3 px-6 rounded-lg bg-indigo-700" value={`${i + 1}. ${note.title}`} /> */}
-            <input onChange={(e) => setNewTitle(e.target.value)} disabled={editToggle} className="text-xl font-medium py-3 px-6 rounded-lg bg-indigo-700" value={note.title} />
-            <textarea id='text' onChange={(e) => setNewDescription(e.target.value)} disabled={editToggle} className={`${editToggle ? "" : "resize-none"} text-lg py-3 px-6 rounded-lg bg-indigo-700`} value={note.description} rows={4} />
+            {/* <input onChange={(e) => setNewTitle(e.target.value)} disabled={editToggle} className="text-xl font-medium py-3 px-6 rounded-lg bg-slate-700" value={`${i + 1}. ${note.title}`} /> */}
+            <input onChange={(e) => setNewTitle(e.target.value)} disabled={editToggle} className="text-xl font-medium py-3 px-6 rounded-lg bg-slate-700" value={note.title} />
+            <textarea id='text' onChange={(e) => setNewDescription(e.target.value)} disabled={editToggle} className={`${editToggle ? "" : "resize-none"} text-lg py-3 px-6 rounded-lg bg-slate-700`} value={note.description} rows={4} />
             <Image
                 className='invert opacity-60 hover:opacity-100 absolute right-6 top-28 cursor-pointer transition-all hover:scale-95'
                 src={copyIcon}
                 alt="copy"
                 width={20}
                 height={20}
-                onClick={() => navigator.clipboard.writeText(note.description)}
+                onClick={() => {navigator.clipboard.writeText(note.description); toast.success("Copied to clipboard", {position: "bottom-center"})}}
             />
 
             {/* Tags */}
@@ -43,7 +44,7 @@ const Notes = ({ note, i, editHandler, deleteHandler, editToggle }) => {
                     note.tag.map((t, i) => {
                         const tagHandler = () => { }
 
-                        return <div key={i} onClick={tagHandler} className={`py-3 px-6 rounded-lg bg-indigo-700 border border-transparent focus:outline select-none ${editToggle ? "" : "hover:bg-indigo-800 active:bg-indigo-900 cursor-pointer"}`}>{t}</div>
+                        return <div key={i} onClick={tagHandler} className={`py-3 px-6 rounded-lg bg-slate-700 border border-transparent focus:outline select-none ${editToggle ? "" : "hover:bg-slate-800 active:bg-slate-900 cursor-pointer"}`}>{t}</div>
                     })
                 }
             </div>

@@ -6,8 +6,8 @@ connectDB();
 
 export const DELETE = async (request) => {
     try {
-        const note = await Note.deleteMany({})
-        return NextResponse.json({message: "All notes deleted successfully", success: true});
+        await Note.deleteMany({})
+        return NextResponse.json({message: "Deleted all notes successfully", success: true});
     } catch (error) {
         return NextResponse.json({error:error.message}, {status:500})
     }

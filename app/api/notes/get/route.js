@@ -4,11 +4,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 connectDB();
 
-export const POST = async (request) => {
+export const GET = async (request) => {
     try {
-        const reqBody = await request.json()
-        const note = await Note.create(reqBody)
-        return NextResponse.json({message: "Note added successfully", success: true, note});
+        const note = await Note.find({})
+        return NextResponse.json({message: "Notes loaded successfully", success: true, note});
     } catch (error) {
         return NextResponse.json({error:error.message}, {status:500})
     }
