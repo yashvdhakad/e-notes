@@ -1,9 +1,9 @@
 import ContextProvider from './context/noteContext'
 import './globals.css'
-import { Inter, Syne } from 'next/font/google'
+import { Inter, Manrope } from 'next/font/google'
 import Nav from './components/sc/Nav'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Manrope({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'eNotes | Note wherever & whenever',
