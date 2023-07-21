@@ -47,7 +47,7 @@ const Notes = ({ note, i, editHandler, deleteHandler, editToggle }) => {
                     note.tag.map((t, i) => {
                         const tagHandler = () => { }
 
-                        return <div key={i} onClick={tagHandler} className={`py-3 px-6 rounded-lg bg-slate-700 border border-transparent focus:outline select-none ${editToggle ? "" : "hover:bg-slate-800 active:bg-slate-900 cursor-pointer"}`}>{t}</div>
+                        return <div key={i} onClick={tagHandler} className={`py-3 px-6 rounded-lg bg-slate-700 border border-transparent focus:outline select-none ${editToggle ? "" : "hover:bg-slate-800 active:bg-slate-900 cursor-pointer"} ${t === "urgent" ? "bg-red-800" : ""}`}>{t}</div>
                     })
                 }
             </div>
