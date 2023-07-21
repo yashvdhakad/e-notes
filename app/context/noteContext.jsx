@@ -6,17 +6,23 @@ import toast from 'react-hot-toast';
 export const NoteContext = createContext()
 
 const ContextProvider = ({ children }) => {
-  const [editToggle, setEditToggle] = useState(true)
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
+  const [tag, setTag] = useState([])
+  
+  const tags = ["work", "personal", "life"]
+
   const [notes, setNotes] = useState([])
-  const [showNote, setShowNote] = useState([])
+
+  const [editToggle, setEditToggle] = useState(true)
 
   // Create note
   const addNoteAPI = async () => {
     try {
-      const response = await axios.post("/api/notes/create", notes)
-      toast.success(response.data.message, {position: "bottom-center"})
+      const response = await axios.post("/api/notes/create", {title, description, tag})
+      toast.success(response.data.message, { position: "bottom-center" })
     } catch (error) {
-      toast.error(error.message, {position: "bottom-center"})
+      toast.error(error.message, { position: "bottom-center" })
     }
   }
 
@@ -24,26 +30,35 @@ const ContextProvider = ({ children }) => {
   const getNoteAPI = async () => {
     try {
       const response = await axios.get("/api/notes/get")
-      setShowNote(response.data.note)
-      console.log(response.data.note)
-      toast.success(response.data.message, {position: "bottom-center"})
+      setNotes(response.data.note)
+      toast.success(response.data.message, { position: "bottom-center" })
     } catch (error) {
-      toast.error(error.message, {position: "bottom-center"})
+      toast.error(error.message, { position: "bottom-center" })
     }
   }
-  
+
+  // Delete note
+  const deleteNoteAPI = async (id) => {
+    try {
+      const response = await axios.delete(`/api/notes/delete/${id}`, id)
+      toast.success(response.data.message, { position: "bottom-center" })
+    } catch (error) {
+      toast.error(error.message, { position: "bottom-center" })
+    }
+  }
+
   // Delete all note
   const deleteAllNoteAPI = async () => {
     try {
       const response = await axios.delete("/api/notes/delete-all")
-      toast.success(response.data.message, {position: "bottom-center"})
+      toast.success(response.data.message, { position: "bottom-center" })
     } catch (error) {
-      toast.error(error.message, {position: "bottom-center"})
+      toast.error(error.message, { position: "bottom-center" })
     }
   }
 
   return (
-    <NoteContext.Provider value={{ notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, showNote, setShowNote, getNoteAPI }}>
+    <NoteContext.Provider value={{ notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, title, setTitle, description, setDescription, tag, setTag, tags }}>
       {children}
     </NoteContext.Provider>
   )

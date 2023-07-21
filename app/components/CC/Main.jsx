@@ -7,13 +7,7 @@ import { NoteContext } from "../../context/noteContext"
 import { Toaster } from 'react-hot-toast'
 
 const Main = () => {
-    const { notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, showNote, getNoteAPI } = useContext(NoteContext)
-
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("")
-    const [tag, setTag] = useState([])
-
-    const tags = ["work", "personal", "life"]
+    const { notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, title, setTitle, description, setDescription, tag, setTag, tags } = useContext(NoteContext)
 
     useEffect(()=>{
         getNoteAPI();
@@ -63,13 +57,14 @@ const Main = () => {
             {/* Output */}
             <section className='lg:w-1/2 h-full py-40 px-20 flex flex-col justify-start items-center space-y-6 overflow-y-scroll'>
                 {
-                    showNote.map((note, i) => {
+                    notes.map((note, i) => {
                         const editHandler = () => {
                             editToggle ? setEditToggle(false) : setEditToggle(true);
                         }
-
+                        
                         const deleteHandler = () => {
                             setNotes(notes.toSpliced(i, 1))
+                            deleteNoteAPI(note._id);
                         }
 
                         return <Notes key={i} note={note} i={i} editHandler={editHandler} deleteHandler={deleteHandler} editToggle={editToggle} />
