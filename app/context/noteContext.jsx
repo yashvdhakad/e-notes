@@ -40,7 +40,7 @@ const ContextProvider = ({ children }) => {
   // Delete note
   const deleteNoteAPI = async (id) => {
     try {
-      const response = await axios.delete(`/api/notes/delete/${id}`, id)
+      const response = await axios.delete(`/api/notes/delete/${id}`)
       toast.success(response.data.message, { position: "bottom-center" })
     } catch (error) {
       toast.error(error.message, { position: "bottom-center" })

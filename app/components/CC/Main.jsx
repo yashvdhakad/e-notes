@@ -30,7 +30,7 @@ const Main = () => {
             <Toaster />
             {/* Input */}
             <section className='lg:w-1/2 h-full flex flex-col justify-center items-center space-y-6 text-xl'>
-                <p className="">Happy eNoting 😎</p>
+                <p className="">Happy e-Noting 😎</p>
                 <input onChange={(e) => setTitle(e.target.value)} className='py-3 px-6 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' type="text" name="title" placeholder="Title" value={title} />
                 <textarea onChange={(e) => setDescription(e.target.value)} className='px-6 py-3 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' name="description" placeholder="Description" cols="24" rows="5" value={description} />
 
