@@ -11,18 +11,21 @@ const Notes = ({ note, i, editHandler, deleteHandler, editToggle }) => {
     const [newdescription, setNewDescription] = useState("")
     const [newtag, setNewTag] = useState("")
 
-    const date = new Date();
+    const date = new Date(note.createdAt);
     let day = date.getDate(), month = date.getMonth() + 1, year = date.getFullYear();
-    let currentDate = `${day}/${month}/${year}`;
-
+    let createdDate = `${day}/${month}/${year}`;
+    let hours = date.getHours(), minutes = date.getMinutes()
+    let createdTime = `${hours}:${minutes}` 
+    
     const colorArr = ["bg-yellow-600", "bg-red-600", "bg-black"]
 
     return (
         // Note Card
         <div className="relative w-full p-2 rounded-lg bg-slate-600 flex flex-col space-y-2">
             <div className='flex justify-between items-center'>
-                <div className='text-sm font-medium'>{currentDate}</div>
+                <div className='text-sm font-medium'>{createdDate}</div>
                 {!editToggle ? <p className='text-sm text-orange-500 font-medium'>*Editing Mode On*</p> : ""}
+                <div className='text-sm font-medium'>{createdTime}</div>
             </div>
 
             {/* Inputs */}

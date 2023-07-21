@@ -18,6 +18,7 @@ const Main = () => {
         setTitle("")
         setDescription("")
         addNoteAPI();
+        getNoteAPI();
     }
 
     const deleteAllHandler = () => {
@@ -64,6 +65,7 @@ const Main = () => {
                         
                         const deleteHandler = () => {
                             setNotes(notes.toSpliced(i, 1))
+                            alert("Are you sure?")
                             deleteNoteAPI(note._id);
                         }
 
