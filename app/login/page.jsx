@@ -1,5 +1,5 @@
 'use client'
-import { Button } from "../components/cc/Buttons"
+import { Button } from "../components/Buttons"
 import Link from "next/link"
 
 const page = () => {

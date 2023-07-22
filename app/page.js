@@ -1,4 +1,4 @@
-import Main from './components/cc/Main'
+import Main from './components/Main'
 
 export default function Home() {
   return (
