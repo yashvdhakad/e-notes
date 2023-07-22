@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 const Nav = () => {
   return (
-    <nav className="max-w-screen-xl z-10 sticky top-0 m-auto lg:px-20 py-4 rounded-lg bg-slate-700 flex justify-between items-center">
+    <nav className="w-full z-10 fixed top-0 m-auto p-4 lg:px-40 rounded-lg bg-slate-700 flex justify-between items-center">
       <p className="text-2xl"><Link href="/">🤓</Link></p>
       <ul className='flex space-x-10'>
         <li><Link className='hover:text-white' href="/about">About</Link></li>

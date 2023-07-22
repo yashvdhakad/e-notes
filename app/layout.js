@@ -1,7 +1,6 @@
 import ContextProvider from './context/noteContext'
 import './globals.css'
 import { Inter, Manrope } from 'next/font/google'
-import Nav from './components/Nav'
 
 const inter = Manrope({ subsets: ['latin'] })
 
@@ -15,10 +14,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className} suppressHydrationWarning={true}>
         <ContextProvider>
-          <>
-            <Nav />
-            {children}
-          </>
+          {children}
         </ContextProvider>
       </body>
     </html>

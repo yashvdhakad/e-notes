@@ -27,19 +27,20 @@ const Main = () => {
     }
 
     return (
-        <>
+        <main className="flex flex-col lg:flex-row lg:justify-center justify-center items-center lg:overflow-hidden">
             <section className="font-bold"><Toaster /></section>
             {/* Input */}
-            <section className='lg:w-1/2 h-full flex flex-col justify-center items-center space-y-6 text-xl'>
-                {/* title */}
+            <section className='h-full lg:py-40 py-20 lg:px-0 flex flex-col justify-start items-center space-y-6 text-xl'>
                 <p className="">Happy e-Noting 😎</p>
+
+                {/* title */}
                 <input onChange={(e) => setTitle(e.target.value)} className='py-3 px-6 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' type="text" name="title" placeholder="Title" value={title} />
 
                 {/* description */}
                 <textarea onChange={(e) => setDescription(e.target.value)} className='px-6 py-3 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' name="description" placeholder="Description" cols="24" rows="5" value={description} />
 
                 {/* Tags */}
-                <div className='p-2 bg-slate-600 rounded-lg placeholder:text-slate-200/60 flex space-x-2'>
+                <div className='p-2 bg-slate-600 rounded-lg placeholder:text-slate-200/60 flex lg:flex-nowrap flex-wrap justify-center items-center gap-2'>
                     {
                         tags.map((t, i) => {
                             const tagHandler = () => {
@@ -59,7 +60,7 @@ const Main = () => {
             </section>
 
             {/* Output */}
-            <section className='lg:w-1/2 h-full py-40 px-20 flex flex-col justify-start items-center space-y-6 overflow-y-scroll'>
+            <section className='h-full lg:py-40 py-20 lg:px-20 flex flex-col justify-start items-center space-y-6 overflow-y-scroll scroll-smooth'>
                 {
                     notes.map((note, i) => {
                         const editHandler = () => {
@@ -81,7 +82,7 @@ const Main = () => {
                     })
                 }
             </section>
-        </>
+        </main>
     )
 }
 
