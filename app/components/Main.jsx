@@ -28,7 +28,7 @@ const Main = () => {
 
     return (
         <>
-            <Toaster />
+            <section className="font-bold"><Toaster /></section>
             {/* Input */}
             <section className='lg:w-1/2 h-full flex flex-col justify-center items-center space-y-6 text-xl'>
                 {/* title */}

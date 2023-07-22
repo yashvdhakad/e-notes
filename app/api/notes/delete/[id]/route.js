@@ -8,7 +8,7 @@ export const DELETE = async (request) => {
     try {
         const id = request.url.split("delete/")[1];
         const note = await Note.findByIdAndDelete({_id: id})
-        return NextResponse.json({message: "Note Deleted successfully", success: true, note});
+        return NextResponse.json({message: "Deleted successfully", success: true, note});
     } catch (error) {
         return NextResponse.json({error:error.message}, {status:500})
     }
