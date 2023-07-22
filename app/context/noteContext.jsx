@@ -12,11 +12,7 @@ const ContextProvider = ({ children }) => {
 
   const tags = ["urgent!", "!urgent && important", "do || die", "x"]
 
-  const [notes, setNotes] = useState([{
-    title: "",
-    description: "",
-    tag: [],
-  }])
+  const [notes, setNotes] = useState([])
 
   const [editToggle, setEditToggle] = useState(true)
 
