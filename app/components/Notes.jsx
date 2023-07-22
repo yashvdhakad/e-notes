@@ -3,9 +3,9 @@ import { useContext, useState } from 'react';
 import { Button } from './Buttons'
 import ThemeToggle from './ThemeToggle'
 import Image from 'next/image'
-import copyIcon from '../../assets/svg/copy-solid.svg'
+import copyIcon from '../assets/svg/copy-solid.svg'
 import { toast } from 'react-hot-toast';
-import { NoteContext } from '../../context/noteContext';
+import { NoteContext } from '../context/noteContext';
 
 const Notes = ({ note, i, editHandler, deleteHandler, editToggle }) => {
     const context = useContext(NoteContext)

@@ -3,7 +3,7 @@
 import { useContext, useState, useEffect } from "react"
 import { Button } from "./Buttons"
 import Notes from "./Notes"
-import { NoteContext } from "../../context/noteContext"
+import { NoteContext } from "../context/noteContext"
 import { Toaster } from 'react-hot-toast'
 
 const Main = () => {
