@@ -31,17 +31,17 @@ const Main = () => {
             <section className="font-bold"><Toaster /></section>
             {/* Input */}
             <section className='h-full lg:py-40 py-20 lg:px-0 flex flex-col justify-start items-center space-y-6 text-xl'>
-                <p className="">Happy e-Noting 😎</p>
+                <p className="">Happy e-Noting 🥸</p>
 
                 {/* title */}
-                <input onChange={(e) => setTitle(e.target.value)} className='w-full py-3 px-6 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none shadow-lg shadow-slate-400/20' type="text" name="title" placeholder="Title" value={title} />
+                <input onChange={(e) => setTitle(e.target.value)} className='w-full py-3 px-6 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' type="text" name="title" placeholder="Title" value={title} />
 
                 {/* description */}
                 <textarea onChange={(e) => setDescription(e.target.value)} className='px-6 py-3 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' name="description" placeholder="Description" cols="24" rows="5" value={description} />
 
                 {/* Tags */}
                 <div className='p-2 bg-slate-600 rounded-lg placeholder:text-slate-200/60 flex lg:flex-nowrap flex-wrap justify-center items-center gap-2 relative'>
-                    <div className="absolute -top-4 left-0 bg-red-700 px-2 py-0.5 rounded-tl-lg rounded-br-lg text-xs">Tags</div>
+                    <div className="absolute -top-4 left-0 bg-slate-800 text-slate-200 px-2 py-0.5 rounded-tl-lg rounded-br-lg text-xs">TAGS</div>
                     {
                         tags.map((t, i) => {
                             const tagHandler = () => {
