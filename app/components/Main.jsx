@@ -34,7 +34,7 @@ const Main = () => {
                 <p className="">Happy e-Noting 😎</p>
 
                 {/* title */}
-                <input onChange={(e) => setTitle(e.target.value)} className='py-3 px-6 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' type="text" name="title" placeholder="Title" value={title} />
+                <input onChange={(e) => setTitle(e.target.value)} className='w-full py-3 px-6 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none shadow-lg shadow-slate-400/20' type="text" name="title" placeholder="Title" value={title} />
 
                 {/* description */}
                 <textarea onChange={(e) => setDescription(e.target.value)} className='px-6 py-3 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' name="description" placeholder="Description" cols="24" rows="5" value={description} />
