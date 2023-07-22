@@ -1,7 +1,7 @@
 import ContextProvider from './context/noteContext'
 import './globals.css'
 import { Inter, Manrope } from 'next/font/google'
-import Nav from './components/sc/Nav'
+import Nav from './components/Nav'
 
 const inter = Manrope({ subsets: ['latin'] })
 
