@@ -7,7 +7,8 @@ connectDB();
 export const POST = async (request) => {
     try {
         const reqBody = await request.json()
-        const note = await Note.create(reqBody)
+        const {title, description, tag} = reqBody;
+        const note = await Note.create({title, description,});
         return NextResponse.json({message: "Note added successfully", success: true, note});
     } catch (error) {
         return NextResponse.json({error:error.message}, {status:500})

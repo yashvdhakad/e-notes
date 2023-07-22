@@ -9,17 +9,21 @@ const ContextProvider = ({ children }) => {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [tag, setTag] = useState([])
-  
-  const tags = ["urgent", "!urgent && important", "do || die"]
+
+  const tags = ["urgent!", "!urgent && important", "do || die"]
 
   const [notes, setNotes] = useState([])
 
   const [editToggle, setEditToggle] = useState(true)
 
+  const [newtitle, setNewTitle] = useState("")
+  const [newdescription, setNewDescription] = useState("")
+  const [newtag, setNewTag] = useState("")
+
   // Create note
   const addNoteAPI = async () => {
     try {
-      const response = await axios.post("/api/notes/create", {title, description, tag})
+      const response = await axios.post("/api/notes/create", { title, description, tag })
       toast.success(response.data.message, { position: "bottom-center" })
     } catch (error) {
       toast.error(error.message, { position: "bottom-center" })
@@ -31,6 +35,17 @@ const ContextProvider = ({ children }) => {
     try {
       const response = await axios.get("/api/notes/get")
       setNotes(response.data.note)
+      toast.success(response.data.message, { position: "bottom-center" })
+    } catch (error) {
+      toast.error(error.message, { position: "bottom-center" })
+    }
+  }
+
+  // Update note
+  const updateNoteAPI = async (id) => {
+    try {
+      const response = await axios.put(`/api/notes/updatenote/${id}`, { newtitle, newdescription, newtag })
+      console.log(response.data.note)
       toast.success(response.data.message, { position: "bottom-center" })
     } catch (error) {
       toast.error(error.message, { position: "bottom-center" })
@@ -58,7 +73,7 @@ const ContextProvider = ({ children }) => {
   }
 
   return (
-    <NoteContext.Provider value={{ notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, title, setTitle, description, setDescription, tag, setTag, tags }}>
+    <NoteContext.Provider value={{ notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, title, setTitle, description, setDescription, tag, setTag, tags, updateNoteAPI, newtitle, setNewTitle, newdescription, setNewDescription, newtag, setNewTag }}>
       {children}
     </NoteContext.Provider>
   )

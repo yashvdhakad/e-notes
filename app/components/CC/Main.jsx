@@ -7,9 +7,9 @@ import { NoteContext } from "../../context/noteContext"
 import { Toaster } from 'react-hot-toast'
 
 const Main = () => {
-    const { notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, title, setTitle, description, setDescription, tag, setTag, tags } = useContext(NoteContext)
+    const { notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, title, setTitle, description, setDescription, tag, setTag, tags, updateNoteAPI } = useContext(NoteContext)
 
-    useEffect(()=>{
+    useEffect(() => {
         getNoteAPI();
     }, [])
 
@@ -31,8 +31,11 @@ const Main = () => {
             <Toaster />
             {/* Input */}
             <section className='lg:w-1/2 h-full flex flex-col justify-center items-center space-y-6 text-xl'>
+                {/* title */}
                 <p className="">Happy e-Noting 😎</p>
                 <input onChange={(e) => setTitle(e.target.value)} className='py-3 px-6 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' type="text" name="title" placeholder="Title" value={title} />
+
+                {/* description */}
                 <textarea onChange={(e) => setDescription(e.target.value)} className='px-6 py-3 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' name="description" placeholder="Description" cols="24" rows="5" value={description} />
 
                 {/* Tags */}
@@ -61,8 +64,10 @@ const Main = () => {
                     notes.map((note, i) => {
                         const editHandler = () => {
                             editToggle ? setEditToggle(false) : setEditToggle(true);
+                            !editToggle && updateNoteAPI(note._id)
+                            console.log(note._id)
                         }
-                        
+
                         const deleteHandler = () => {
                             setNotes(notes.toSpliced(i, 1))
                             alert("Are you sure?")
