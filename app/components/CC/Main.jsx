@@ -7,7 +7,7 @@ import { NoteContext } from "../../context/noteContext"
 import { Toaster } from 'react-hot-toast'
 
 const Main = () => {
-    const { notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, title, setTitle, description, setDescription, tag, setTag, tags, updateNoteAPI } = useContext(NoteContext)
+    const { notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, title, setTitle, description, setDescription, tag, setTag, tags, updateNoteAPI, newtitle, setNewTitle, newdescription, setNewDescription, newtag, setNewTag } = useContext(NoteContext)
 
     useEffect(() => {
         getNoteAPI();
@@ -64,8 +64,11 @@ const Main = () => {
                     notes.map((note, i) => {
                         const editHandler = () => {
                             editToggle ? setEditToggle(false) : setEditToggle(true);
-                            !editToggle && updateNoteAPI(note._id)
-                            console.log(note._id)
+                            !editToggle && updateNoteAPI(note._id) && updateNoteHandler();
+                        }
+
+                        const updateNoteHandler = () => {
+                            console.log(notes);
                         }
 
                         const deleteHandler = () => {

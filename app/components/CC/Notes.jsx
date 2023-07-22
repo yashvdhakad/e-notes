@@ -9,14 +9,14 @@ import { NoteContext } from '../../context/noteContext';
 
 const Notes = ({ note, i, editHandler, deleteHandler, editToggle }) => {
     const context = useContext(NoteContext)
-    const {newtitle, setNewTitle, newdescription, setNewDescription, newtag, setNewTag, title, setTitle, description, setDescription, tag, setTag} = context;
+    const { newtitle, setNewTitle, newdescription, setNewDescription, newtag, setNewTag} = context;
 
     const date = new Date(note.createdAt);
     let day = date.getDate(), month = date.getMonth() + 1, year = date.getFullYear();
     let createdDate = `${day}/${month}/${year}`;
     let hours = date.getHours(), minutes = date.getMinutes()
-    let createdTime = `${hours}:${minutes}` 
-    
+    let createdTime = `${hours}:${minutes}`
+
     const colorArr = ["bg-yellow-600", "bg-red-600", "bg-black"]
 
     return (
@@ -30,7 +30,7 @@ const Notes = ({ note, i, editHandler, deleteHandler, editToggle }) => {
             </div>
 
             {/* title */}
-            <input onChange={(e) => setNotes(e.target.value)} disabled={editToggle} className="text-xl font-medium py-3 px-6 rounded-lg bg-slate-700" value={note.title} />
+            <input onChange={(e) => setNewTitle(e.target.value)} disabled={editToggle} className="text-xl font-medium py-3 px-6 rounded-lg bg-slate-700" value={note.title} />
 
             {/* description */}
             <textarea onChange={(e) => setNewDescription(e.target.value)} disabled={editToggle} className={`${editToggle ? "resize-none" : ""} text-lg py-3 px-6 rounded-lg bg-slate-700`} value={note.description} rows={4} />
@@ -41,7 +41,7 @@ const Notes = ({ note, i, editHandler, deleteHandler, editToggle }) => {
                 alt="copy"
                 width={20}
                 height={20}
-                onClick={() => {navigator.clipboard.writeText(note.description); toast.success("Copied to clipboard", {position: "bottom-center"})}}
+                onClick={() => { navigator.clipboard.writeText(note.description); toast.success("Copied to clipboard", { position: "bottom-center" }) }}
             />
 
             {/* Tags */}

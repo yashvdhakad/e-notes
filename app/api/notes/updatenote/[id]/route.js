@@ -10,11 +10,11 @@ export const PUT = async (request) => {
         const reqBody = await request.json()
         const id = request.url.split("updatenote/")[1]
 
-        const {title, description, tag} = reqBody;
-        
-        const note = await Note.findByIdAndUpdate({_id:id}, {title, description, tag})
-        return NextResponse.json({message: "Note updated successfully", success: true, note});
+        const { title, description, tag } = reqBody;
+
+        const note = await Note.findByIdAndUpdate({ _id: id }, { title, description, tag })
+        return NextResponse.json({ message: "Note updated successfully", success: true, note });
     } catch (error) {
-        return NextResponse.json({error:error.message}, {status:500})
+        return NextResponse.json({ error: error.message }, { status: 500 })
     }
 }

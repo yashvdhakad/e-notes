@@ -45,7 +45,7 @@ const ContextProvider = ({ children }) => {
   const updateNoteAPI = async (id) => {
     try {
       const response = await axios.put(`/api/notes/updatenote/${id}`, { newtitle, newdescription, newtag })
-      console.log(response.data.note)
+      // console.log(response.data.note)
       toast.success(response.data.message, { position: "bottom-center" })
     } catch (error) {
       toast.error(error.message, { position: "bottom-center" })
