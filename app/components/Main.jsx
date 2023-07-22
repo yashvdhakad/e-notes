@@ -40,7 +40,8 @@ const Main = () => {
                 <textarea onChange={(e) => setDescription(e.target.value)} className='px-6 py-3 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' name="description" placeholder="Description" cols="24" rows="5" value={description} />
 
                 {/* Tags */}
-                <div className='p-2 bg-slate-600 rounded-lg placeholder:text-slate-200/60 flex lg:flex-nowrap flex-wrap justify-center items-center gap-2'>
+                <div className='p-2 bg-slate-600 rounded-lg placeholder:text-slate-200/60 flex lg:flex-nowrap flex-wrap justify-center items-center gap-2 relative'>
+                    <div className="absolute -top-4 left-0 bg-red-700 px-2 py-0.5 rounded-tl-lg rounded-br-lg text-xs">Tags</div>
                     {
                         tags.map((t, i) => {
                             const tagHandler = () => {

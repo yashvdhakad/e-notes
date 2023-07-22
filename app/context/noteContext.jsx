@@ -10,7 +10,7 @@ const ContextProvider = ({ children }) => {
   const [description, setDescription] = useState("")
   const [tag, setTag] = useState([])
 
-  const tags = ["urgent!", "!urgent && important", "do || die", "x"]
+  const tags = ["urg! && imp", "!urg && imp", "do || die"]
 
   const [notes, setNotes] = useState([])
 
