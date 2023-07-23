@@ -14,9 +14,9 @@ const ContextProvider = ({ children }) => {
   const [editToggle, setEditToggle] = useState(true)
 
   // Create note
-  const addNoteAPI = async (note) => {
+  const addNoteAPI = async () => {
     try {
-      const response = await axios.post("/api/notes/create", { title: note.title, description: note.description, tag: note.tag })
+      const response = await axios.post("/api/notes/create", { title: initialNote.title, description: initialNote.description, tag: initialNote.tag })
       toast.success(response.data.message, { position: "bottom-center" })
     } catch (error) {
       toast.error(error.message, { position: "bottom-center" })
@@ -27,7 +27,7 @@ const ContextProvider = ({ children }) => {
   const getNoteAPI = async () => {
     try {
       const response = await axios.get("/api/notes/get")
-      setNotes((arr) => [...arr, response.data.note])
+      setNotes(notes.concat(response.data.note))
       toast.success(response.data.message, { position: "bottom-center" })
     } catch (error) {
       toast.error(error.message, { position: "bottom-center" })

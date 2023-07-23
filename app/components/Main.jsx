@@ -14,15 +14,8 @@ const Main = () => {
     }, [])
 
     const addNoteHandler = () => {
-        // note.title === "" || note.description === "" || note.tag === "" ? "" : 
         setNotes((arr) => [...arr, { title: initialNote.title, description: initialNote.description, tag: initialNote.tag }]);
-
-        for (let i = 0; i < notes.length; i++) {
-            const note = notes[i];
-            addNoteAPI(note);
-        }
-
-        // getNoteAPI();
+        addNoteAPI();
     }
 
     const deleteAllHandler = () => {
