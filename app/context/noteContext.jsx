@@ -7,11 +7,10 @@ export const NoteContext = createContext()
 
 const ContextProvider = ({ children }) => {
   const initialNote = { tag: [] }
-  const tags = ["urg! && imp", "!urg && imp", "do || die"]
-
   const [notes, setNotes] = useState([])
-
+  const tags = ["urg!", "imp!", "do || die"]
   const [editToggle, setEditToggle] = useState(true)
+  const [newNote, setNewNote] = useState([{title:"",description:"", tag:[]}])
 
   // Create note
   const addNoteAPI = async () => {
@@ -35,10 +34,9 @@ const ContextProvider = ({ children }) => {
   }
 
   // Update note
-  const updateNoteAPI = async (id) => {
+  const updateNoteAPI = async (id, i) => {
     try {
-      const response = await axios.put(`/api/notes/update/${id}`, { newtitle, newdescription, newtag })
-      // console.log(response.data.note)
+      const response = await axios.put(`/api/notes/update/${id}`, newNote[i])
       toast.success(response.data.message, { position: "bottom-center" })
     } catch (error) {
       toast.error(error.message, { position: "bottom-center" })
@@ -66,7 +64,7 @@ const ContextProvider = ({ children }) => {
   }
 
   return (
-    <NoteContext.Provider value={{ initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI }}>
+    <NoteContext.Provider value={{ initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI, newNote, setNewNote }}>
       {children}
     </NoteContext.Provider>
   )

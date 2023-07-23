@@ -1,15 +1,15 @@
 "use client";
-// import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { Button } from './Buttons'
 import ThemeToggle from './ThemeToggle'
 import Image from 'next/image'
 import copyIcon from '../assets/svg/copy-solid.svg'
 import { toast } from 'react-hot-toast';
-// import { NoteContext } from '../context/noteContext';
+import { NoteContext } from '../context/noteContext';
 
 const Notes = ({ note, i, editHandler, deleteHandler, editToggle }) => {
-    // const context = useContext(NoteContext)
-    // const {  } = context;
+    const context = useContext(NoteContext)
+    const { newNote } = context;
 
     // Date & Time
     const date = new Date(note.createdAt);
@@ -19,10 +19,14 @@ const Notes = ({ note, i, editHandler, deleteHandler, editToggle }) => {
     let createdTime = `${hours}:${minutes}`
 
     // Theme colors
-    const colorArr = ["bg-yellow-600", "bg-red-600", "bg-black"]
+    const colorArr = ["bg-red-600", "bg-white", "bg-black"]
 
-    const onChangeHandler = () => {
-
+    const onChangeHandler = (e) => {
+        for (let i = 0; i < newNote.length; i++) {
+            const newNoteElement = newNote[i];
+            newNoteElement[e.target.name] = e.target.value
+        }
+        console.log(e.target.value)
     }
 
     return (
@@ -36,10 +40,11 @@ const Notes = ({ note, i, editHandler, deleteHandler, editToggle }) => {
             </div>
 
             {/* title */}
-            <input onChange={onChangeHandler} disabled={editToggle} className="text-xl font-medium py-3 px-6 rounded-lg bg-slate-700 shadow shadow-slate-800" value={note.title} />
+            <input onChange={onChangeHandler} disabled={editToggle} className="text-xl font-medium py-3 px-6 rounded-lg bg-slate-700 shadow shadow-slate-800" value={editToggle ? note.title : newNote.title} type='text' name="title" />
+
 
             {/* description */}
-            <textarea onChange={onChangeHandler} disabled={editToggle} className={`shadow shadow-slate-800 ${editToggle ? "resize-none" : ""} text-lg py-3 px-6 rounded-lg bg-slate-700`} value={note.description} rows={4} />
+            <textarea onChange={onChangeHandler} disabled={editToggle} className={`shadow shadow-slate-800 ${editToggle ? "resize-none" : ""} text-lg py-3 px-6 rounded-lg bg-slate-700`} value={editToggle ? note.description : newNote.description} rows={4} name='description' />
 
             <Image
                 className='invert opacity-60 hover:opacity-100 absolute right-6 top-28 cursor-pointer transition-all hover:scale-95'

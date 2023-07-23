@@ -4,7 +4,7 @@ import { useContext } from "react";
 
 const ThemeToggle = ({color}) => {
     return (
-        <div className={`w-8 h-8 rounded-full ${color} cursor-pointer transition-all hover:scale-95`}></div>
+        <div className={`w-6 h-6 rounded-full ${color} cursor-pointer transition-all hover:scale-95`}></div>
     )
 }
 

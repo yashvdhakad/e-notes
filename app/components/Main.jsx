@@ -7,7 +7,7 @@ import { NoteContext } from "../context/noteContext"
 import { Toaster } from 'react-hot-toast'
 
 const Main = () => {
-    const { initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI } = useContext(NoteContext)
+    const { initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI, newNote, setNewNote } = useContext(NoteContext)
 
     useEffect(() => {
         getNoteAPI();
@@ -67,14 +67,19 @@ const Main = () => {
                     notes.map((note, i) => {
                         const editHandler = () => {
                             editToggle ? setEditToggle(false) : setEditToggle(true);
-                            !editToggle && updateNoteAPI(note._id) && updateNoteHandler();
+                            !editToggle && updateNoteAPI(note._id, i) && updateNoteHandler();
                         }
 
-                        const updateNoteHandler = () => { };
+                        const updateNoteHandler = () => {
+                            for (let i = 0; i < newNote.length; i++) {
+                                const newNoteElement = newNote[i];
+                                setNewNote((arr) => [...arr, { title: newNoteElement.title, description: newNoteElement.description, tag: newNoteElement.tag }]);
+                            }
+                            console.log(newNote)
+                        };
 
                         const deleteHandler = () => {
                             setNotes(notes.toSpliced(i, 1))
-                            alert("Are you sure?")
                             deleteNoteAPI(note._id);
                         }
 
