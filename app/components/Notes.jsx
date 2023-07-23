@@ -26,7 +26,6 @@ const Notes = ({ note, i, editHandler, deleteHandler, editToggle }) => {
             const newNoteElement = newNote[i];
             newNoteElement[e.target.name] = e.target.value
         }
-        console.log(e.target.value)
     }
 
     return (

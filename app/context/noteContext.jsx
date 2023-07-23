@@ -10,12 +10,13 @@ const ContextProvider = ({ children }) => {
   const [notes, setNotes] = useState([])
   const tags = ["urg!", "imp!", "do || die"]
   const [editToggle, setEditToggle] = useState(true)
-  const [newNote, setNewNote] = useState([{title:"",description:"", tag:[]}])
+  const [newNote, setNewNote] = useState([{ title: "", description: "", tag: [] }])
 
   // Create note
   const addNoteAPI = async () => {
     try {
       const response = await axios.post("/api/notes/create", { title: initialNote.title, description: initialNote.description, tag: initialNote.tag })
+      setNotes(notes.concat(response.data.note))
       toast.success(response.data.message, { position: "bottom-center" })
     } catch (error) {
       toast.error(error.message, { position: "bottom-center" })
