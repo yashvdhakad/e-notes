@@ -7,23 +7,31 @@ import { NoteContext } from "../context/noteContext"
 import { Toaster } from 'react-hot-toast'
 
 const Main = () => {
-    const { notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, title, setTitle, description, setDescription, tag, setTag, tags, updateNoteAPI, newtitle, setNewTitle, newdescription, setNewDescription, newtag, setNewTag } = useContext(NoteContext)
+    const { initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI } = useContext(NoteContext)
 
     useEffect(() => {
         getNoteAPI();
     }, [])
 
     const addNoteHandler = () => {
-        title === "" || description === "" || tag === "" ? "" : setNotes((arr) => [...arr, { title, description, tag }])
-        setTitle("")
-        setDescription("")
-        addNoteAPI();
-        getNoteAPI();
+        // note.title === "" || note.description === "" || note.tag === "" ? "" : 
+        setNotes((arr) => [...arr, { title: initialNote.title, description: initialNote.description, tag: initialNote.tag }]);
+
+        for (let i = 0; i < notes.length; i++) {
+            const note = notes[i];
+            addNoteAPI(note);
+        }
+
+        // getNoteAPI();
     }
 
     const deleteAllHandler = () => {
         setNotes([]);
         deleteAllNoteAPI();
+    }
+
+    const onChangeHandler = (e) => {
+        initialNote[e.target.name] = e.target.value
     }
 
     return (
@@ -34,10 +42,10 @@ const Main = () => {
                 <p className="">Happy e-Noting 🥸</p>
 
                 {/* title */}
-                <input onChange={(e) => setTitle(e.target.value)} className='w-full py-3 px-6 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' type="text" name="title" placeholder="Title" value={title} />
+                <input onChange={onChangeHandler} className='w-full py-3 px-6 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' type="text" name="title" placeholder="Title" value={initialNote.title} />
 
                 {/* description */}
-                <textarea onChange={(e) => setDescription(e.target.value)} className='px-6 py-3 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' name="description" placeholder="Description" cols="24" rows="5" value={description} />
+                <textarea onChange={onChangeHandler} className='px-6 py-3 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' name="description" placeholder="Description" cols="24" rows="5" value={initialNote.description} />
 
                 {/* Tags */}
                 <div className='p-2 bg-slate-600 rounded-lg placeholder:text-slate-200/60 flex lg:flex-nowrap flex-wrap justify-center items-center gap-2 relative'>
@@ -45,7 +53,7 @@ const Main = () => {
                     {
                         tags.map((t, i) => {
                             const tagHandler = () => {
-                                setTag([t])
+                                initialNote.tag.push(t)
                             }
 
                             return <div key={i} onClick={tagHandler} className="py-3 px-6 rounded-lg bg-slate-700 cursor-pointer hover:bg-slate-800 active:bg-slate-900 select-none">{t}</div>
@@ -69,9 +77,7 @@ const Main = () => {
                             !editToggle && updateNoteAPI(note._id) && updateNoteHandler();
                         }
 
-                        const updateNoteHandler = () => {
-                            console.log(notes);
-                        }
+                        const updateNoteHandler = () => { };
 
                         const deleteHandler = () => {
                             setNotes(notes.toSpliced(i, 1))

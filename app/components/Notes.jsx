@@ -9,14 +9,16 @@ import { NoteContext } from '../context/noteContext';
 
 const Notes = ({ note, i, editHandler, deleteHandler, editToggle }) => {
     const context = useContext(NoteContext)
-    const { newtitle, setNewTitle, newdescription, setNewDescription, newtag, setNewTag } = context;
+    const {  } = context;
 
+    // Date & Time
     const date = new Date(note.createdAt);
     let day = date.getDate(), month = date.getMonth() + 1, year = date.getFullYear();
     let createdDate = `${day}/${month}/${year}`;
     let hours = date.getHours(), minutes = date.getMinutes()
     let createdTime = `${hours}:${minutes}`
 
+    // Theme colors
     const colorArr = ["bg-yellow-600", "bg-red-600", "bg-black"]
 
     return (

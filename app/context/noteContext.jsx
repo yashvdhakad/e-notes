@@ -6,24 +6,17 @@ import toast from 'react-hot-toast';
 export const NoteContext = createContext()
 
 const ContextProvider = ({ children }) => {
-  const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
-  const [tag, setTag] = useState([])
-
+  const initialNote = { tag: [] }
   const tags = ["urg! && imp", "!urg && imp", "do || die"]
 
   const [notes, setNotes] = useState([])
 
   const [editToggle, setEditToggle] = useState(true)
 
-  const [newtitle, setNewTitle] = useState("")
-  const [newdescription, setNewDescription] = useState("")
-  const [newtag, setNewTag] = useState("")
-
   // Create note
-  const addNoteAPI = async () => {
+  const addNoteAPI = async (note) => {
     try {
-      const response = await axios.post("/api/notes/create", { title, description, tag })
+      const response = await axios.post("/api/notes/create", { title: note.title, description: note.description, tag: note.tag })
       toast.success(response.data.message, { position: "bottom-center" })
     } catch (error) {
       toast.error(error.message, { position: "bottom-center" })
@@ -34,7 +27,7 @@ const ContextProvider = ({ children }) => {
   const getNoteAPI = async () => {
     try {
       const response = await axios.get("/api/notes/get")
-      setNotes(response.data.note)
+      setNotes((arr) => [...arr, response.data.note])
       toast.success(response.data.message, { position: "bottom-center" })
     } catch (error) {
       toast.error(error.message, { position: "bottom-center" })
@@ -44,7 +37,7 @@ const ContextProvider = ({ children }) => {
   // Update note
   const updateNoteAPI = async (id) => {
     try {
-      const response = await axios.put(`/api/notes/updatenote/${id}`, { newtitle, newdescription, newtag })
+      const response = await axios.put(`/api/notes/update/${id}`, { newtitle, newdescription, newtag })
       // console.log(response.data.note)
       toast.success(response.data.message, { position: "bottom-center" })
     } catch (error) {
@@ -73,7 +66,7 @@ const ContextProvider = ({ children }) => {
   }
 
   return (
-    <NoteContext.Provider value={{ notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, title, setTitle, description, setDescription, tag, setTag, tags, updateNoteAPI, newtitle, setNewTitle, newdescription, setNewDescription, newtag, setNewTag }}>
+    <NoteContext.Provider value={{ initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI }}>
       {children}
     </NoteContext.Provider>
   )

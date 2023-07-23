@@ -8,7 +8,7 @@ export const PUT = async (request) => {
     try {
         // TODO: req id/note > find and update > res updated note
         const reqBody = await request.json()
-        const id = request.url.split("updatenote/")[1]
+        const id = request.url.split("update/")[1]
 
         const { title, description, tag } = reqBody;
 
