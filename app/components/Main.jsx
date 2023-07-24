@@ -71,8 +71,10 @@ const Main = () => {
                         }
 
                         const updateNoteHandler = () => {
-                            setNewNote((arr) => [...arr, { title: newNote[i].title, description: newNote[i].description, tag: newNote[i].tag }]);
-                            console.log(newNote)
+                            for (let i = 0; i < newNote.length; i++) {
+                                const newNoteElement = newNote[i];
+                                setNewNote((arr) => [...arr, { title: newNoteElement.title, description: newNoteElement.description, tag: newNoteElement.tag }]);
+                            }
                         };
 
                         const deleteHandler = () => {
