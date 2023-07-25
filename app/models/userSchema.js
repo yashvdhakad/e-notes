@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
         required: true,
         select: false,
         // minLength: [6, "Password is too short"]
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
     }
 });
 

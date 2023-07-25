@@ -7,7 +7,7 @@ import { NoteContext } from "../context/noteContext"
 import { Toaster } from 'react-hot-toast'
 
 const Main = () => {
-    const { initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI, newNote, setNewNote } = useContext(NoteContext)
+    const { initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI, newNote, setNewNote, user } = useContext(NoteContext)
 
     useEffect(() => {
         getNoteAPI();
@@ -16,8 +16,6 @@ const Main = () => {
     const addNoteHandler = () => {
         initialNote.title !== undefined && initialNote.description !== undefined && setNotes((arr) => [...arr, { title: initialNote.title, description: initialNote.description, tag: initialNote.tag }]);
         addNoteAPI();
-        initialNote.title = ""
-        console.log(initialNote.title)
     }
 
     const deleteAllHandler = () => {
@@ -34,10 +32,10 @@ const Main = () => {
             <section className="font-bold"><Toaster /></section>
             {/* Input */}
             <section className='h-full lg:pt-40 py-20 lg:px-0 flex flex-col justify-start items-center space-y-6 text-xl'>
-                <p className="text-slate-400">Welcome Yash! Happy e-Noting 🥸</p>
+                <p className="text-slate-400">Welcome {user.name}! Happy e-Noting 🥸</p>
 
                 {/* title */}
-                <input onChange={onChangeHandler} className='w-full py-3 px-6 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' type="text" name="title" placeholder="Title" value={initialNote.title} />
+                <input id="title" onChange={onChangeHandler} className='w-full py-3 px-6 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' type="text" name="title" placeholder="Title" value={initialNote.title} />
 
                 {/* description */}
                 <textarea onChange={onChangeHandler} className='px-6 py-3 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' name="description" placeholder="Description" cols="24" rows="8" value={initialNote.description} />

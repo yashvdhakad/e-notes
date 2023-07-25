@@ -11,6 +11,8 @@ const ContextProvider = ({ children }) => {
   const tags = ["urg!", "imp!", "do || die", "obsv"]
   const [editToggle, setEditToggle] = useState(true)
   const [newNote, setNewNote] = useState([{ title: "", description: "", tag: [] }])
+  
+  const [user, setUser] = useState({})
 
   // Create note
   const addNoteAPI = async () => {
@@ -64,8 +66,18 @@ const ContextProvider = ({ children }) => {
     }
   }
 
+  // Create user
+  const signupAPI = async () => {
+    try {
+      const response = await axios.post("/api/users/sign-up", { name: user.name, email: user.email, password: user.password })
+      toast.success(response.data.message, { position: "bottom-center" })
+    } catch (error) {
+      toast.error("Please fill all fields above.", { position: "bottom-center" })
+    }
+  }
+
   return (
-    <NoteContext.Provider value={{ initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI, newNote, setNewNote }}>
+    <NoteContext.Provider value={{ initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI, newNote, setNewNote, user, setUser, signupAPI }}>
       {children}
     </NoteContext.Provider>
   )
