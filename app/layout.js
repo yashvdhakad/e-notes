@@ -5,7 +5,7 @@ import { Inter, Manrope } from 'next/font/google'
 const inter = Manrope({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'eNotes | Note wherever & whenever',
+  title: 'eNotes | Note whenever & wherever',
   description: 'The eNotes App is a simple and user-friendly note-taking application that allows users to create, organize, and manage their notes efficiently.',
 }
 

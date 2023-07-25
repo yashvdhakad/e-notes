@@ -14,8 +14,10 @@ const Main = () => {
     }, [])
 
     const addNoteHandler = () => {
-        setNotes((arr) => [...arr, { title: initialNote.title, description: initialNote.description, tag: initialNote.tag }]);
+        initialNote.title !== undefined && initialNote.description !== undefined && setNotes((arr) => [...arr, { title: initialNote.title, description: initialNote.description, tag: initialNote.tag }]);
         addNoteAPI();
+        initialNote.title = ""
+        console.log(initialNote.title)
     }
 
     const deleteAllHandler = () => {
@@ -31,14 +33,14 @@ const Main = () => {
         <main className="flex flex-col lg:flex-row lg:justify-center justify-center items-center lg:overflow-hidden">
             <section className="font-bold"><Toaster /></section>
             {/* Input */}
-            <section className='h-full lg:py-40 py-20 lg:px-0 flex flex-col justify-start items-center space-y-6 text-xl'>
-                <p className="">Happy e-Noting 🥸</p>
+            <section className='h-full lg:pt-40 py-20 lg:px-0 flex flex-col justify-start items-center space-y-6 text-xl'>
+                <p className="text-slate-400">Welcome Yash! Happy e-Noting 🥸</p>
 
                 {/* title */}
                 <input onChange={onChangeHandler} className='w-full py-3 px-6 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' type="text" name="title" placeholder="Title" value={initialNote.title} />
 
                 {/* description */}
-                <textarea onChange={onChangeHandler} className='px-6 py-3 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' name="description" placeholder="Description" cols="24" rows="5" value={initialNote.description} />
+                <textarea onChange={onChangeHandler} className='px-6 py-3 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' name="description" placeholder="Description" cols="24" rows="8" value={initialNote.description} />
 
                 {/* Tags */}
                 <div className='p-2 bg-slate-600 rounded-lg placeholder:text-slate-200/60 flex lg:flex-nowrap flex-wrap justify-center items-center gap-2 relative'>
@@ -57,7 +59,7 @@ const Main = () => {
                 {/* Buttons */}
                 <div className="flex space-x-6">
                     <Button clickHandler={addNoteHandler} cta="Add Note" />
-                    <Button clickHandler={deleteAllHandler} cta="Delete All" />
+                    <Button clickHandler={deleteAllHandler} cta="Delete All Notes" />
                 </div>
             </section>
 
@@ -67,15 +69,16 @@ const Main = () => {
                     notes.map((note, i) => {
                         const editHandler = () => {
                             editToggle ? setEditToggle(false) : setEditToggle(true);
-                            !editToggle && updateNoteAPI(note._id, i) && updateNoteHandler();
+                            !editToggle && (newNote[0].title !== "" || newNote[0].description !== "") && updateNoteAPI(note._id, i) && updateNoteHandler();
                         }
 
                         const updateNoteHandler = () => {
                             for (let i = 0; i < newNote.length; i++) {
                                 const newNoteElement = newNote[i];
                                 setNewNote((arr) => [...arr, { title: newNoteElement.title, description: newNoteElement.description, tag: newNoteElement.tag }]);
-                            }
-                        };
+                            };
+                        }
+
 
                         const deleteHandler = () => {
                             setNotes(notes.toSpliced(i, 1))

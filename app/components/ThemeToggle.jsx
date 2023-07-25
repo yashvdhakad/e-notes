@@ -2,9 +2,9 @@
 // import { NoteContext } from "@/app/context/noteContext";
 import { useContext } from "react";
 
-const ThemeToggle = ({color}) => {
+const ThemeToggle = ({color, clickHandler}) => {
     return (
-        <div className={`w-6 h-6 rounded-full ${color} cursor-pointer transition-all hover:scale-95`}></div>
+        <button onClick={clickHandler} className={`w-6 h-6 rounded-full ${color} transition-all hover:scale-95`}></button>
     )
 }
 

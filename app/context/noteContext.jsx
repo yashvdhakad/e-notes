@@ -8,7 +8,7 @@ export const NoteContext = createContext()
 const ContextProvider = ({ children }) => {
   const initialNote = { tag: [] }
   const [notes, setNotes] = useState([])
-  const tags = ["urg!", "imp!", "do || die"]
+  const tags = ["urg!", "imp!", "do || die", "obsv"]
   const [editToggle, setEditToggle] = useState(true)
   const [newNote, setNewNote] = useState([{ title: "", description: "", tag: [] }])
 
@@ -19,7 +19,7 @@ const ContextProvider = ({ children }) => {
       setNotes(notes.concat(response.data.note))
       toast.success(response.data.message, { position: "bottom-center" })
     } catch (error) {
-      toast.error(error.message, { position: "bottom-center" })
+      toast.error("Please fill all fields above.", { position: "bottom-center" })
     }
   }
 
