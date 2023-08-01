@@ -70,6 +70,7 @@ const ContextProvider = ({ children }) => {
   const signupAPI = async () => {
     try {
       const response = await axios.post("/api/users/sign-up", { name: user.name, email: user.email, password: user.password })
+      setUser(response.data.user.name)
       toast.success(response.data.message, { position: "bottom-center" })
     } catch (error) {
       toast.error("Please fill all fields above.", { position: "bottom-center" })
