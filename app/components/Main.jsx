@@ -7,7 +7,7 @@ import { NoteContext } from "../context/noteContext"
 import { Toaster } from 'react-hot-toast'
 
 const Main = () => {
-    const { initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI, newNote, setNewNote, user } = useContext(NoteContext)
+    const { initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI, newNote, setNewNote, user, loggedInUser } = useContext(NoteContext)
 
     useEffect(() => {
         getNoteAPI()
@@ -32,16 +32,16 @@ const Main = () => {
             <section className="font-bold"><Toaster /></section>
             {/* Input */}
             <section className='h-full lg:pt-40 py-20 lg:px-0 flex flex-col justify-start items-center space-y-6 text-xl'>
-                <p className="text-slate-400">Welcome {user}! Happy e-Noting 🥸</p>
+                <p className="text-slate-400">Welcome {loggedInUser}! Happy e-Noting.</p>
 
                 {/* title */}
-                <input id="title" onChange={onChangeHandler} className='w-full py-3 px-6 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' type="text" name="title" placeholder="Title" value={initialNote.title} />
+                <input id="title" onChange={onChangeHandler} className='w-full py-3 px-6 bg-transparent border border-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' type="text" name="title" placeholder="Title" value={initialNote.title} />
 
                 {/* description */}
-                <textarea onChange={onChangeHandler} className='px-6 py-3 bg-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' name="description" placeholder="Description" cols="24" rows="8" value={initialNote.description} />
+                <textarea onChange={onChangeHandler} className='px-6 py-3 bg-transparent border border-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' name="description" placeholder="Description" cols="24" rows="8" value={initialNote.description} />
 
                 {/* Tags */}
-                <div className='p-2 bg-slate-600 rounded-lg placeholder:text-slate-200/60 flex lg:flex-nowrap flex-wrap justify-center items-center gap-2 relative'>
+                <div className='p-2 bg-transparent border border-slate-600 rounded-lg placeholder:text-slate-200/60 flex lg:flex-nowrap flex-wrap justify-center items-center gap-2 relative'>
                     <div className="absolute -top-4 left-0 bg-slate-800 text-slate-200 px-2 py-0.5 rounded-tl-lg rounded-br-lg text-xs">TAGS</div>
                     {
                         tags.map((t, i) => {

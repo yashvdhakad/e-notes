@@ -2,6 +2,7 @@
 import { createContext, useState } from "react";
 import axios from "axios"
 import toast from 'react-hot-toast';
+import { useRouter } from "next/navigation"
 
 export const NoteContext = createContext()
 
@@ -11,8 +12,12 @@ const ContextProvider = ({ children }) => {
   const tags = ["urg!", "imp!", "do || die", "obsv"]
   const [editToggle, setEditToggle] = useState(true)
   const [newNote, setNewNote] = useState([{ title: "", description: "", tag: [] }])
+
+  // TODO: add loading state, component and buttons disable validations etc.
   
-  const [user, setUser] = useState({})
+  const user = [];
+  const [loggedInUser, setLoggedInUser] = useState("")
+  const router = useRouter();
 
   // Create note
   const addNoteAPI = async () => {
@@ -70,15 +75,16 @@ const ContextProvider = ({ children }) => {
   const signupAPI = async () => {
     try {
       const response = await axios.post("/api/users/sign-up", { name: user.name, email: user.email, password: user.password })
-      setUser(response.data.user.name)
-      toast.success(response.data.message, { position: "bottom-center" })
+      setLoggedInUser(response.data.newUser.name)
+      response.data.success ? toast.success(response.data.message, { position: "bottom-center" }) : toast.error(response.data.message, { position: "bottom-center" })
+      router.push("/")
     } catch (error) {
-      toast.error("Please fill all fields above.", { position: "bottom-center" })
+      toast.error(error.message, { position: "bottom-center" })
     }
   }
 
   return (
-    <NoteContext.Provider value={{ initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI, newNote, setNewNote, user, setUser, signupAPI }}>
+    <NoteContext.Provider value={{ initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI, newNote, setNewNote, user, loggedInUser, signupAPI }}>
       {children}
     </NoteContext.Provider>
   )
