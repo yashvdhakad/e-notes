@@ -15,7 +15,7 @@ const ContextProvider = ({ children }) => {
 
   // TODO: add loading state, component and buttons disable validations etc.
   
-  const user = [];
+  const user = {};
   const [loggedInUser, setLoggedInUser] = useState("")
   const router = useRouter();
 
@@ -74,7 +74,7 @@ const ContextProvider = ({ children }) => {
   // Create user
   const signupAPI = async () => {
     try {
-      const response = await axios.post("/api/users/sign-up", { name: user.name, email: user.email, password: user.password })
+      const response = await axios.post("/api/users/sign-up", user)
       setLoggedInUser(response.data.newUser.name)
       response.data.success ? toast.success(response.data.message, { position: "bottom-center" }) : toast.error(response.data.message, { position: "bottom-center" })
       router.push("/")
@@ -82,9 +82,21 @@ const ContextProvider = ({ children }) => {
       toast.error(error.message, { position: "bottom-center" })
     }
   }
+  
+  // Login user
+  const loginAPI = async () => {
+    try {
+      const response = await axios.post("/api/users/login", user)
+      // setLoggedInUser(response.cookies)
+      // console.log(response)
+      response.data.success ? toast.success(response.data.message, { position: "bottom-center" }) && router.push("/") : toast.error(response.data.message, { position: "bottom-center" })
+    } catch (error) {
+      toast.error(error.message, { position: "bottom-center" })
+    }
+  }
 
   return (
-    <NoteContext.Provider value={{ initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI, newNote, setNewNote, user, loggedInUser, signupAPI }}>
+    <NoteContext.Provider value={{ initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI, newNote, setNewNote, user, loggedInUser, signupAPI, loginAPI }}>
       {children}
     </NoteContext.Provider>
   )
