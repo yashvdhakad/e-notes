@@ -25,7 +25,7 @@ export const POST = async (request) => {
 
         // create token data
         const tokenData = {
-            id: user_id,
+            id: user._id,
             name: user.name,
             email: user.email
         }

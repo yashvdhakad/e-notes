@@ -22,8 +22,8 @@ const page = () => {
                 <h1 className="font-medium text-2xl">Login to eNotes</h1>
                 <hr className="opacity-30" />
                 <div className="flex flex-col space-y-6">
-                    <input className="py-3 px-6 bg-transparent border  border-slate-600 rounded-lg placeholder:text-slate-200/60" onChange={changeHandler} type="email" name="" placeholder="Enter your email" />
-                    <input className="py-3 px-6 bg-transparent border  border-slate-600 rounded-lg placeholder:text-slate-200/60" onChange={changeHandler} type="password" name="" placeholder="Enter your password" />
+                    <input className="py-3 px-6 bg-transparent border  border-slate-600 rounded-lg placeholder:text-slate-200/60" onChange={changeHandler} type="email" name="email" placeholder="Enter your email" />
+                    <input className="py-3 px-6 bg-transparent border  border-slate-600 rounded-lg placeholder:text-slate-200/60" onChange={changeHandler} type="password" name="password" placeholder="Enter your password" />
                 </div>
                 <Button clickHandler={clickHandler} cta="Login" />
                 <hr className="opacity-30" />

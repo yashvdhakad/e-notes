@@ -77,7 +77,7 @@ const ContextProvider = ({ children }) => {
       const response = await axios.post("/api/users/sign-up", user)
       setLoggedInUser(response.data.newUser.name)
       response.data.success ? toast.success(response.data.message, { position: "bottom-center" }) : toast.error(response.data.message, { position: "bottom-center" })
-      router.push("/")
+      router.push("/login")
     } catch (error) {
       toast.error(error.message, { position: "bottom-center" })
     }
@@ -89,7 +89,7 @@ const ContextProvider = ({ children }) => {
       const response = await axios.post("/api/users/login", user)
       // setLoggedInUser(response.cookies)
       // console.log(response)
-      response.data.success ? toast.success(response.data.message, { position: "bottom-center" }) && router.push("/") : toast.error(response.data.message, { position: "bottom-center" })
+      response.data.success ? toast.success(response.data.message, { position: "bottom-center" }) && router.push("/dashboard") : toast.error(response.data.message, { position: "bottom-center" })
     } catch (error) {
       toast.error(error.message, { position: "bottom-center" })
     }
