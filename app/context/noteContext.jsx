@@ -94,6 +94,16 @@ const ContextProvider = ({ children }) => {
       toast.error(error.message, { position: "bottom-center" })
     }
   }
+  
+  // Logout user
+  const logoutAPI = async () => {
+    try {
+      await axios.get("/api/users/logout")
+      response.data.success ? toast.success(response.data.message, { position: "bottom-center" }) && router.push("/login") : toast.error(response.data.message, { position: "bottom-center" })
+    } catch (error) {
+      toast.error(error.message, { position: "bottom-center" })
+    }
+  }
 
   return (
     <NoteContext.Provider value={{ initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI, newNote, setNewNote, user, loggedInUser, signupAPI, loginAPI }}>
