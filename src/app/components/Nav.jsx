@@ -25,7 +25,6 @@ const Nav = () => {
         <li><Link className='hover:text-white' href="/about">About</Link></li>
         <li><Link className='hover:text-white' href="/dashboard">Dashboard</Link></li>
         <li><Link className='hover:text-white' href="/profile">Profile</Link></li>
-        <li><Link className='hover:text-white' href="/login">Login</Link></li>
         <li><Button clickHandler={() => logoutAPI()} cta="Logout" /></li>
       </ul>
     </nav>
