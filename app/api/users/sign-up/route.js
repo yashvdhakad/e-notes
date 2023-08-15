@@ -2,7 +2,7 @@ import { connectDB } from "../../../db/db";
 import User from "../../../models/userSchema";
 import { NextResponse } from "next/server";
 import bcryptjs from "bcryptjs"
-import { sendmail } from '../../../helpers/mailer'
+import { sendEmail } from '../../../helpers/mailer'
 
 connectDB();
 
@@ -25,11 +25,7 @@ export const POST = async (request) => {
         const newUser = await User.create({ name, email, password: hashedPassword });
 
         // send verification email
-        try {
-            await sendmail({email, emailType: "VERIFY", userId: newUser._id.toString()})
-        } catch (error) {
-            console.error(error.message)
-        }
+        await sendEmail({ email, emailType: "VERIFY", userId: newUser._id.toString() })
 
         return NextResponse.json({ message: "Sign-up successfully", success: true, newUser });
     } catch (error) {

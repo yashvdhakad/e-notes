@@ -1,5 +1,5 @@
 import { connectDB } from '../../../db/db'
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import User from '../../../models/userSchema'
 
 connectDB();
@@ -7,6 +7,7 @@ connectDB();
 export const POST = async (request) => {
     try {
         const reqBody = await request.json()
+        console.log(reqBody)
         const { token } = reqBody;
 
         const user = await User.findOne({ verifyToken: token, verifyTokenExpiry: { $gt: Date.now() } })

@@ -19,6 +19,7 @@ const ContextProvider = ({ children }) => {
   const router = useRouter();
 
   const [userProfileData, setUserProfileData] = useState({})
+  const [urlToken, setUrlToken] = useState("")
 
   // Create note
   const addNoteAPI = async () => {
@@ -102,7 +103,7 @@ const ContextProvider = ({ children }) => {
     }
   }
   
-  // Profile user
+  // User data
   const profileAPI = async () => {
     try {
       const response = await axios.get("/api/users/profile")
@@ -112,9 +113,19 @@ const ContextProvider = ({ children }) => {
       toast.error(error.message, { position: "bottom-center" })
     }
   }
+  
+  // Verify email
+  const verifyEmailAPI = async () => {
+    try {
+      const response = await axios.post("/api/users/verifyemail", urlToken)
+      response.data.success ? toast.success(response.data.message, { position: "bottom-center" }) : toast.error(response.data.message, { position: "bottom-center" })
+    } catch (error) {
+      toast.error(error.message, { position: "bottom-center" })
+    }
+  }
 
   return (
-    <NoteContext.Provider value={{ initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI, newNote, setNewNote, user, signupAPI, loginAPI, logoutAPI, profileAPI, userProfileData }}>
+    <NoteContext.Provider value={{ initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI, newNote, setNewNote, user, signupAPI, loginAPI, logoutAPI, profileAPI, userProfileData, verifyEmailAPI, urlToken, setUrlToken }}>
       {children}
     </NoteContext.Provider>
   )
