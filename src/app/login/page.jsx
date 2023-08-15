@@ -3,6 +3,7 @@ import { useContext } from "react"
 import { Button } from "../components/Buttons"
 import Link from "next/link"
 import { NoteContext } from "../context/noteContext"
+import { Toaster } from 'react-hot-toast'
 
 const page = () => {
     const context = useContext(NoteContext)
@@ -17,6 +18,7 @@ const page = () => {
     }
     return (
         <section className='h-screen grid place-items-center'>
+            <section className="font-bold"><Toaster /></section>
             <Link className="absolute top-20 left-40 text-2xl" href="/">←</Link>
             <div className="flex flex-col space-y-6 text-center">
                 <h1 className="font-medium text-2xl">Login to eNotes</h1>
