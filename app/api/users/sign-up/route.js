@@ -25,7 +25,11 @@ export const POST = async (request) => {
         const newUser = await User.create({ name, email, password: hashedPassword });
 
         // send verification email
-        await sendmail({email, emailType: "VERIFY", userId: newUser._id})
+        try {
+            await sendmail({email, emailType: "VERIFY", userId: newUser._id.toString()})
+        } catch (error) {
+            console.error(error.message)
+        }
 
         return NextResponse.json({ message: "Sign-up successfully", success: true, newUser });
     } catch (error) {
