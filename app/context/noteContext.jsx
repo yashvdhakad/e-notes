@@ -13,10 +13,9 @@ const ContextProvider = ({ children }) => {
   const [editToggle, setEditToggle] = useState(true)
   const [newNote, setNewNote] = useState([{ title: "", description: "", tag: [] }])
 
-  // TODO: add loading state, component and buttons disable validations etc.
+  // TODO: add loading state, loader, component and buttons disable validations, filters in notes etc.
   
   const user = {};
-  const [loggedInUser, setLoggedInUser] = useState("")
   const router = useRouter();
 
   const [userProfileData, setUserProfileData] = useState({})
@@ -77,7 +76,6 @@ const ContextProvider = ({ children }) => {
   const signupAPI = async () => {
     try {
       const response = await axios.post("/api/users/sign-up", user)
-      setLoggedInUser(response.data.newUser.name)
       response.data.success ? toast.success(response.data.message, { position: "bottom-center" }) && router.push("/login") : toast.error(response.data.message, { position: "bottom-center" })
     } catch (error) {
       toast.error(error.message, { position: "bottom-center" })
@@ -88,8 +86,6 @@ const ContextProvider = ({ children }) => {
   const loginAPI = async () => {
     try {
       const response = await axios.post("/api/users/login", user)
-      // setLoggedInUser(response.cookies)
-      // console.log(response)
       response.data.success ? toast.success(response.data.message, { position: "bottom-center" }) && router.push("/dashboard") : toast.error(response.data.message, { position: "bottom-center" })
     } catch (error) {
       toast.error(error.message, { position: "bottom-center" })
@@ -118,7 +114,7 @@ const ContextProvider = ({ children }) => {
   }
 
   return (
-    <NoteContext.Provider value={{ initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI, newNote, setNewNote, user, loggedInUser, signupAPI, loginAPI, logoutAPI, profileAPI, userProfileData }}>
+    <NoteContext.Provider value={{ initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI, newNote, setNewNote, user, signupAPI, loginAPI, logoutAPI, profileAPI, userProfileData }}>
       {children}
     </NoteContext.Provider>
   )

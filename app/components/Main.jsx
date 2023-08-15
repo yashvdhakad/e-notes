@@ -7,7 +7,7 @@ import { NoteContext } from "../context/noteContext"
 import { Toaster } from 'react-hot-toast'
 
 const Main = () => {
-    const { initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI, newNote, setNewNote, user, loggedInUser } = useContext(NoteContext)
+    const { initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI, newNote, setNewNote, userProfileData } = useContext(NoteContext)
 
     useEffect(() => {
         getNoteAPI()
@@ -32,7 +32,7 @@ const Main = () => {
             <section className="font-bold"><Toaster /></section>
             {/* Input */}
             <section className='h-full lg:pt-40 py-20 lg:px-0 flex flex-col justify-start items-center space-y-6 text-xl'>
-                <p className="text-slate-400">Welcome {loggedInUser}! Happy e-Noting.</p>
+                <p className="text-slate-400">Welcome {userProfileData.name}! Happy e-Noting.</p>
 
                 {/* title */}
                 <input id="title" onChange={onChangeHandler} className='w-full py-3 px-6 bg-transparent border border-slate-600 rounded-lg placeholder:text-slate-200/60 focus:outline-none' type="text" name="title" placeholder="Title" value={initialNote.title} />

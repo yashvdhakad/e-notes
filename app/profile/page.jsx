@@ -5,6 +5,7 @@ import { NoteContext } from "../context/noteContext"
 import { Toaster } from 'react-hot-toast'
 import Image from "next/image";
 import dp from '../assets/dp.png'
+import Nav from '../components/Nav'
 
 const page = () => {
   const { userProfileData, profileAPI } = useContext(NoteContext)
@@ -15,13 +16,14 @@ const page = () => {
 
   return (
     <>
-      <div className="bg-slate-900 text-slate-100 min-h-screen">
+    <Nav/>
+      <div className="bg-slate-900 text-slate-100 min-h-screen mt-20">
         <main className="container mx-auto px-4 py-8">
           <h2 className="text-3xl font-bold mb-4">Welcome to the Dashboard!</h2>
 
           <div className="mt-8">
             <h3 className="text-xl font-bold mb-2">Profile</h3>
-            <div className="border border-slate-500 shadow rounded-lg p-4">
+            <div className="border border-slate-700 bg-slate-800 shadow rounded-lg p-4">
               <div className="flex items-center">
                 <Image
                   className="rounded-full"
@@ -48,7 +50,7 @@ const page = () => {
 
           <div className="mt-8">
             <h3 className="text-xl font-bold mb-2">Recent Activity</h3>
-            <ul className="border border-slate-500 shadow rounded-lg p-4">
+            <ul className="border border-slate-700 bg-slate-800 shadow rounded-lg p-4">
               <li className="flex items-center space-x-4">
                 <span className="bg-blue-500 rounded-full w-8 h-8"></span>
                 <p className="">John Doe logged in</p>
@@ -65,7 +67,7 @@ const page = () => {
           </div>
           <div className="mt-8">
             <h3 className="text-xl font-bold mb-2">Tasks</h3>
-            <ul className="border border-slate-500 shadow rounded-lg p-4">
+            <ul className="border border-slate-700 bg-slate-800 shadow rounded-lg p-4">
               <li className="flex items-center space-x-4">
                 <input type="checkbox" className="form-checkbox h-4 w-4 text-blue-500" />
                 <p className="">Complete the project proposal</p>
@@ -85,7 +87,7 @@ const page = () => {
         <footer className="bg-slate-900 text-slate-100 py-4">
           <div className="container mx-auto px-4">
             <p className="text-center">
-              &copy; {new Date().getFullYear()} My Dashboard. All rights reserved.
+              &copy; {new Date().getFullYear()} YD. All rights reserved.
             </p>
           </div>
         </footer>
