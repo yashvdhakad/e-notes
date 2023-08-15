@@ -19,5 +19,6 @@ export const config = {
         '/dashboard',
         '/login',
         '/signup',
+        '/profile',
     ],
 }

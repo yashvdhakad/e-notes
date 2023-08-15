@@ -19,6 +19,8 @@ const ContextProvider = ({ children }) => {
   const [loggedInUser, setLoggedInUser] = useState("")
   const router = useRouter();
 
+  const [userProfileData, setUserProfileData] = useState({})
+
   // Create note
   const addNoteAPI = async () => {
     try {
@@ -76,8 +78,7 @@ const ContextProvider = ({ children }) => {
     try {
       const response = await axios.post("/api/users/sign-up", user)
       setLoggedInUser(response.data.newUser.name)
-      response.data.success ? toast.success(response.data.message, { position: "bottom-center" }) : toast.error(response.data.message, { position: "bottom-center" })
-      router.push("/login")
+      response.data.success ? toast.success(response.data.message, { position: "bottom-center" }) && router.push("/login") : toast.error(response.data.message, { position: "bottom-center" })
     } catch (error) {
       toast.error(error.message, { position: "bottom-center" })
     }
@@ -98,15 +99,26 @@ const ContextProvider = ({ children }) => {
   // Logout user
   const logoutAPI = async () => {
     try {
-      await axios.get("/api/users/logout")
+      const response = await axios.get("/api/users/logout")
       response.data.success ? toast.success(response.data.message, { position: "bottom-center" }) && router.push("/login") : toast.error(response.data.message, { position: "bottom-center" })
+    } catch (error) {
+      toast.error(error.message, { position: "bottom-center" })
+    }
+  }
+  
+  // Profile user
+  const profileAPI = async () => {
+    try {
+      const response = await axios.get("/api/users/profile")
+      setUserProfileData(response.data.user)
+      response.data.success ? toast.success(response.data.message, { position: "bottom-center" }) : toast.error(response.data.message, { position: "bottom-center" })
     } catch (error) {
       toast.error(error.message, { position: "bottom-center" })
     }
   }
 
   return (
-    <NoteContext.Provider value={{ initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI, newNote, setNewNote, user, loggedInUser, signupAPI, loginAPI }}>
+    <NoteContext.Provider value={{ initialNote, tags, notes, setNotes, editToggle, setEditToggle, addNoteAPI, deleteAllNoteAPI, getNoteAPI, deleteNoteAPI, updateNoteAPI, newNote, setNewNote, user, loggedInUser, signupAPI, loginAPI, logoutAPI, profileAPI, userProfileData }}>
       {children}
     </NoteContext.Provider>
   )

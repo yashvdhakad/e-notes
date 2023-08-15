@@ -1,6 +1,6 @@
 "use client"
 
-import { useContext, useState, useEffect } from "react"
+import { useContext, useMemo, useEffect } from "react"
 import { Button } from "./Buttons"
 import Notes from "./Notes"
 import { NoteContext } from "../context/noteContext"
@@ -12,7 +12,7 @@ const Main = () => {
     useEffect(() => {
         getNoteAPI()
     }, [])
-
+    
     const addNoteHandler = () => {
         initialNote.title !== undefined && initialNote.description !== undefined && setNotes((arr) => [...arr, { title: initialNote.title, description: initialNote.description, tag: initialNote.tag }]);
         addNoteAPI();

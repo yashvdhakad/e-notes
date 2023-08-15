@@ -16,6 +16,8 @@ const Nav = () => {
       </Link>
       <ul className='flex space-x-10'>
         <li><Link className='hover:text-white' href="/about">About</Link></li>
+        <li><Link className='hover:text-white' href="/dashboard">Dashboard</Link></li>
+        <li><Link className='hover:text-white' href="/profile">Profile</Link></li>
         <li><Link className='hover:text-white' href="/login">Login</Link></li>
       </ul>
     </nav>
