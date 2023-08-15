@@ -1,7 +1,8 @@
 import { connectDB } from "../../../db/db";
 import User from "../../../models/userSchema";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import bcryptjs from "bcryptjs"
+import { sendmail } from '../../../helpers/mailer'
 
 connectDB();
 
@@ -13,7 +14,7 @@ export const POST = async (request) => {
         // check if user already exits
         const user = await User.findOne({ email });
         if (user) {
-            return NextResponse.json({ message: "User already exists", success: false});
+            return NextResponse.json({ message: "User already exists", success: false });
         }
 
         // hash password
@@ -22,6 +23,9 @@ export const POST = async (request) => {
 
         // create user
         const newUser = await User.create({ name, email, password: hashedPassword });
+
+        // send verification email
+        await sendmail({email, emailType: "VERIFY", userId: newUser._id})
 
         return NextResponse.json({ message: "Sign-up successfully", success: true, newUser });
     } catch (error) {
